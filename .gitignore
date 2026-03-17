@@ -6,3 +6,6 @@ __pycache__/
 dist/
 build/
 *.log
+
+# Backup BBDD - NO ignorar
+!db_backup/*.sql
