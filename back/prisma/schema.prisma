@@ -1,0 +1,96 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum Role {
+  USER
+  ADMIN
+}
+
+model User {
+  id              String        @id @default(uuid())
+  email           String        @unique
+  password        String
+  role            Role          @default(USER)
+  maxAssistants   Int           @default(1)
+  maxPhoneNumbers Int           @default(1)
+  createdAt       DateTime      @default(now())
+  updatedAt       DateTime      @updatedAt
+  agents          Agent[]
+  phoneNumbers    PhoneNumber[]
+}
+
+model PhoneNumber {
+  id                String   @id @default(uuid())
+  number            String   @unique
+  sipDomain         String?
+  sipUser           String?
+  sipPassword       String?
+  vapiPhoneNumberId String?
+  vapiCredentialId  String?
+  userId            String?
+  user              User?    @relation(fields: [userId], references: [id])
+  isActive          Boolean  @default(true)
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
+  agents            Agent[]
+}
+
+model Agent {
+  id              String       @id @default(uuid())
+  userId          String?
+  user            User?        @relation(fields: [userId], references: [id])
+  phoneNumberId   String?
+  phoneNumber     PhoneNumber? @relation(fields: [phoneNumberId], references: [id])
+  assistant_id    String?
+  agentName       String?      @default("Recepcionista Virtual")
+  gender          String?      @default("female")
+  company         String?
+  firstMessage    String?
+  // Contactos para transferencia (JSON: [{name: string, active: boolean}])
+  contacts        String?
+  // Transferencias / hablar con alguien
+  transferEnabled Boolean  @default(false)
+  transferFields  String?
+  transferEmail   String?
+  // Descripción de servicios/productos de la empresa
+  servicesEnabled Boolean  @default(true)
+  servicesInfo    String?
+  servicesEmail   String?
+  // Incidencias
+  incidentEnabled Boolean  @default(false)
+  // JSON array de IDs de campos a recoger: ["nombre","telefono","descripcion",...]
+  incidentFields  String?
+  // Email al que enviar el reporte de incidencia
+  incidentEmail   String?
+  // Facturas
+  invoiceEnabled  Boolean  @default(false)
+  invoiceFields   String?
+  invoiceEmail    String?
+  // Instrucciones adicionales o contexto extra
+  additionalInfo  String?
+  createdAt       DateTime     @default(now())
+  updatedAt       DateTime     @updatedAt
+  calls           Call[]
+}
+
+model Call {
+  id           String   @id @default(uuid())
+  agentId      String
+  agent        Agent    @relation(fields: [agentId], references: [id])
+  caller_phone String?
+  status       String   @default("completed")
+  cost         Float?   @default(0)
+  // Tipo de llamada: incidencia, transferencia, factura, pregunta_servicio, lead, otro
+  call_type    String?
+  // Resumen de la llamada (extraído del transcript por Vapi)
+  summary      String?
+  duration     Int?
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+}
