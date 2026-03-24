@@ -2,7 +2,7 @@
 -- PostgreSQL database dump
 --
 
-\restrict JZ1EgbIqWsVGQCcNpwK0rhpgHZhE5RS69KWGOgb5Mds29tjlWPcUpgLbw1gq7mm
+\restrict vsefnTocGzuaXUMXIZRNVJGHmTPqfGFBKV2R80gPsj1Z2fS7PNyRbbfh4bO8h5k
 
 -- Dumped from database version 18.3
 -- Dumped by pg_dump version 18.3
@@ -133,8 +133,8 @@ ALTER TABLE public."User" OWNER TO postgres;
 --
 
 COPY public."Agent" (id, "userId", "phoneNumberId", assistant_id, "agentName", gender, company, "firstMessage", "servicesInfo", "additionalInfo", "createdAt", "updatedAt", "incidentEmail", "incidentEnabled", "incidentFields", "invoiceEmail", "invoiceEnabled", "invoiceFields", "transferEmail", "transferEnabled", "transferFields", contacts, "servicesEmail", "servicesEnabled") FROM stdin;
+47c2fb7d-5dd0-43a5-84eb-97cc5167d444	1c595e98-a756-4c26-a8af-cd44e19c64da	f124e38a-fedb-4259-9a56-c97279935c37	5ed1133f-4521-4780-b219-1b232ec027b2	Pepes	male	Fuimos.plus		Ofrecemos servicio de mantenimiento industrial y reparaciones	Abrimos de 8 de la mañana a 12 del medio dia	2026-03-24 14:33:24.442	2026-03-24 14:33:29.173		f	["nombre","telefono","descripcion"]		f	["nombre","nif","periodo","telefono"]	\N	t	\N	[{"name":"durillo","phone":"657899887"}]	alberlanga@somos.plus	t
 37cf61c8-cab4-4d26-8cfa-8b9a51be5910	1c595e98-a756-4c26-a8af-cd44e19c64da	\N	4a82e724-de9c-47d4-9f82-f1de971f2472	Sofia	female	Somos.plus	Gracias por llamar a somos.plus, te atienda Sofia ¿ en que puedo ayudarte?	Ofrecemos servicios de mantenimiento industrial, instalación de equipos, soporte técnico 24h, y todo tipo de reparaciones de maquinaria.		2026-03-20 09:55:39.045	2026-03-20 12:39:00.596	alberlanga@somos.plus	t	["nombre","telefono","descripcion"]		f	["nombre","nif","periodo","telefono"]	\N	f	\N	[]	\N	t
-699fbb40-924d-42eb-a776-7e00c3444643	1c595e98-a756-4c26-a8af-cd44e19c64da	f124e38a-fedb-4259-9a56-c97279935c37	f73ad12c-b59b-4961-b769-36bce5705653	tobby	male	zomoguapo	Hola zoy tobby, guau, ¿ en que te puedo ayudar?	ofrecemos paseos a perros 24 horas		2026-03-20 12:25:07.094	2026-03-20 12:39:07.542	alberlanga@somos.plus	t	["nombre","telefono","descripcion"]		f	["nombre","nif","periodo","telefono"]	\N	f	\N	[]	alberlanga@somos.plus	t
 \.
 
 
@@ -147,8 +147,8 @@ d0194519-5af6-4d89-8d6c-e21fb1b08649	37cf61c8-cab4-4d26-8cfa-8b9a51be5910	+62319
 5e899f43-b03a-4df1-b154-96e7a7f9388c	37cf61c8-cab4-4d26-8cfa-8b9a51be5910	+623194123	failed	0.1321	incidencia	El motivo de la llamada fue que el usuario, Alejandro López, reportó que su máquina no arranca, aparentemente por falta de batería. La incidencia fue registrada por el asistente virtual, quien le informó que un miembro del equipo se pondrá en contacto con él lo antes posible para resolver el problema.	86	2026-03-20 11:37:12.745	2026-03-20 11:37:12.745
 a040cc9f-ffed-4c9b-92aa-e5295ceec19b	37cf61c8-cab4-4d26-8cfa-8b9a51be5910	+623194123	failed	0.1553	lead	El usuario llamó para informarse sobre los servicios ofrecidos, mostrando interés en la instalación de maquinaria. Para resolver su consulta, se le solicitaron sus datos de contacto y se le informó que un miembro del equipo se comunicaría con él para brindarle más detalles.	108	2026-03-20 11:47:23.932	2026-03-20 11:47:23.932
 e88090cf-5b2d-4af5-9b82-ba86d6789312	37cf61c8-cab4-4d26-8cfa-8b9a51be5910	670262954	failed	0.1827	incidencia	El usuario llamó porque su máquina no funciona o no enciende. La IA recopiló su nombre (Pepe) y número de contacto, registrando la incidencia. Se le informó que un miembro del equipo se comunicará con él para resolver el problema.	111	2026-03-20 12:06:37.158	2026-03-20 12:06:37.158
-39ae0e57-ae51-46c7-bd44-8c69d921ae7c	699fbb40-924d-42eb-a776-7e00c3444643	+623194123	failed	0.0054	otro	El motivo de la llamada no se pudo determinar a partir de la transcripción proporcionada. La llamada finalizó porque el cliente la terminó.	5	2026-03-20 12:39:48.805	2026-03-20 12:39:48.805
-160f1b19-f56d-4002-8efe-8d48820cfe5a	699fbb40-924d-42eb-a776-7e00c3444643	+623194123	failed	0.0047	otro	El motivo de la llamada no pudo ser determinado, ya que el cliente finalizó la comunicación inmediatamente después del saludo inicial del agente. Por lo tanto, la consulta no fue expresada ni resuelta.	4	2026-03-20 12:40:02.144	2026-03-20 12:40:02.144
+41ac8a5f-c86d-40f2-af82-175d02680a45	47c2fb7d-5dd0-43a5-84eb-97cc5167d444	+623194123	failed	0.042	transferencia	El usuario llamó para hablar con Durillo. La IA le proporcionó el número de teléfono directo de Durillo, resolviendo así la consulta. La llamada finalizó tras ofrecerle esta información.	26	2026-03-24 14:34:44.399	2026-03-24 14:34:44.399
+d19f0b9c-9d88-4348-9621-4fbd866bc06f	47c2fb7d-5dd0-43a5-84eb-97cc5167d444	+623194123	failed	0.0402	transferencia	El usuario llamó para contactar a Durillo. El asistente le proporcionó el número de teléfono directo de Durillo, y la llamada concluyó tras ofrecerle esta información.	25	2026-03-24 14:35:37.599	2026-03-24 14:35:37.599
 \.
 
 
@@ -167,7 +167,7 @@ f124e38a-fedb-4259-9a56-c97279935c37	+34911596038	ix6.neotel2000.com	4779-405	fJ
 
 COPY public."User" (id, email, password, role, "maxAssistants", "maxPhoneNumbers", "createdAt", "updatedAt") FROM stdin;
 6f27a4af-25a5-405d-ad82-439aad6d310c	admin@somos.plus	$2b$10$iwf.AsqwQTInvYlXDLdkS.ValhDwrGLSc7UTNXw/1MA7AO.NaRjai	ADMIN	999	999	2026-03-17 14:25:56.807	2026-03-17 14:25:56.807
-1c595e98-a756-4c26-a8af-cd44e19c64da	clupianez@somos.plus	$2b$10$8cXmQijfNLF7rn3KwY/tUeUJh3GvoGhEwEjyokvyqdXbhCqrAIXRy	USER	2	2	2026-03-17 14:37:46.254	2026-03-20 12:15:25.408
+1c595e98-a756-4c26-a8af-cd44e19c64da	clupianez@somos.plus	$2b$10$8cXmQijfNLF7rn3KwY/tUeUJh3GvoGhEwEjyokvyqdXbhCqrAIXRy	USER	4	2	2026-03-17 14:37:46.254	2026-03-24 14:49:27.492
 \.
 
 
@@ -253,5 +253,5 @@ ALTER TABLE ONLY public."PhoneNumber"
 -- PostgreSQL database dump complete
 --
 
-\unrestrict JZ1EgbIqWsVGQCcNpwK0rhpgHZhE5RS69KWGOgb5Mds29tjlWPcUpgLbw1gq7mm
+\unrestrict vsefnTocGzuaXUMXIZRNVJGHmTPqfGFBKV2R80gPsj1Z2fS7PNyRbbfh4bO8h5k
 

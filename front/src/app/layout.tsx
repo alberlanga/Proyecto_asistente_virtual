@@ -5,6 +5,7 @@ import { AuthProvider } from '@/context/AuthContext';
 export const metadata: Metadata = {
   title: 'Asistente Virtual de Recepción',
   description: 'Plataforma de gestión de asistentes de recepción con IA',
+  icons: { icon: '/favicon.svg' },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

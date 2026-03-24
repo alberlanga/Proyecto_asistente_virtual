@@ -48,6 +48,7 @@ export const INVOICE_FIELD_LABELS: Record<string, string> = {
 
 interface Contact {
   name: string;
+  phone: string;
 }
 
 interface CreateAssistantParams {
@@ -81,9 +82,9 @@ export const createVapiAssistant = async (params: CreateAssistantParams): Promis
     transferSection = `\nPETICIONES DE HABLAR CON ALGUIEN:\nNo gestionas peticiones de transferencia. Si el cliente quiere hablar con alguien, indícale amablemente que no está disponible este canal y ofrécele otros medios de contacto.`;
   } else {
     const contactList = (contacts || []).length > 0
-      ? `\nContactos disponibles:\n${contacts.map(c => `  - ${c.name}`).join('\n')}`
+      ? `\nDirectorio:\n${contacts.map(c => `  - ${c.name}: ${c.phone}`).join('\n')}`
       : '';
-    transferSection = `\nPETICIONES DE HABLAR CON ALGUIEN:\nCuando un cliente quiera hablar con una persona o departamento concreto, indícale quién está disponible y recoge: nombre del cliente, teléfono de contacto y motivo de la llamada.${contactList}\nInforma al cliente de que la persona solicitada le devolverá la llamada lo antes posible.`;
+    transferSection = `\nDIRECTORIO DE CONTACTOS:\nCuando un cliente pregunte por una persona concreta, busca su nombre en el directorio y facilítale su número de teléfono directo para que pueda llamarle.${contactList}\nSi la persona no está en el directorio, indícale amablemente que no dispones de ese contacto.`;
   }
 
   let servicesSection: string;

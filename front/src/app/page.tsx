@@ -18,7 +18,6 @@ const INVOICE_FIELDS = [
 const INCIDENT_FIELDS = [
   { id: 'nombre',      label: 'Nombre del cliente' },
   { id: 'telefono',    label: 'Teléfono de contacto' },
-  { id: 'email',       label: 'Email del cliente' },
   { id: 'contrato',    label: 'Número de contrato' },
   { id: 'descripcion', label: 'Descripción del problema' },
   { id: 'urgencia',    label: 'Nivel de urgencia (alta/media/baja)' },
@@ -41,8 +40,9 @@ export default function HomePage() {
 
   // Transferencias
   const [transferEnabled, setTransferEnabled] = useState(false);
-  const [contacts, setContacts] = useState<{ name: string }[]>([]);
-  const [newContact, setNewContact] = useState('');
+  const [contacts, setContacts] = useState<{ name: string; phone: string }[]>([]);
+  const [newContactName, setNewContactName] = useState('');
+  const [newContactPhone, setNewContactPhone] = useState('');
 
   // Incidencias
   const [incidentEnabled, setIncidentEnabled] = useState(false);
@@ -171,15 +171,15 @@ export default function HomePage() {
               </div>
             </div>
 
-            {/* Transferencias */}
+            {/* Directorio de contactos */}
             <div className="premium-card p-6 space-y-4">
               <div className="flex items-center justify-between">
                 <div>
-                  <h2 className="text-lg font-semibold text-white">Transferencias de llamada</h2>
+                  <h2 className="text-lg font-semibold text-white">Directorio de contactos</h2>
                   <p className="text-slate-400 text-sm mt-0.5">
                     {transferEnabled
-                      ? 'El agente podrá transferir llamadas a los contactos configurados.'
-                      : 'Desactivado — el agente indicará que no puede transferir llamadas.'}
+                      ? 'El agente facilitará el número de teléfono cuando pregunten por un contacto.'
+                      : 'Desactivado — el agente indicará que no dispone de directorio de contactos.'}
                   </p>
                 </div>
                 <button
@@ -197,35 +197,48 @@ export default function HomePage() {
 
               {transferEnabled && (
                 <div className="space-y-3 pt-2 border-t border-slate-700">
-                  <p className="text-sm font-medium text-slate-300">Contactos disponibles</p>
+                  <p className="text-sm font-medium text-slate-300">Contactos</p>
 
                   {/* Añadir contacto */}
                   <div className="flex gap-2">
                     <input
                       type="text"
-                      value={newContact}
-                      onChange={e => setNewContact(e.target.value)}
+                      value={newContactName}
+                      onChange={e => setNewContactName(e.target.value)}
+                      className="input-field flex-1"
+                      placeholder="Nombre (ej: José)"
+                      maxLength={80}
+                    />
+                    <input
+                      type="text"
+                      value={newContactPhone}
+                      onChange={e => setNewContactPhone(e.target.value)}
                       onKeyDown={e => {
                         if (e.key === 'Enter') {
                           e.preventDefault();
-                          const trimmed = newContact.trim();
-                          if (trimmed) {
-                            setContacts(prev => [...prev, { name: trimmed }]);
-                            setNewContact('');
+                          const name = newContactName.trim();
+                          const phone = newContactPhone.trim();
+                          if (name && phone) {
+                            setContacts(prev => [...prev, { name, phone }]);
+                            setNewContactName('');
+                            setNewContactPhone('');
                           }
                         }
                       }}
                       className="input-field flex-1"
-                      placeholder="Ej: Juan García - Director Técnico - Ext. 101"
-                      maxLength={120}
+                      placeholder="+34 612 345 678"
+                      style={{ maxWidth: '160px' }}
+                      maxLength={20}
                     />
                     <button
                       type="button"
                       onClick={() => {
-                        const trimmed = newContact.trim();
-                        if (trimmed) {
-                          setContacts(prev => [...prev, { name: trimmed }]);
-                          setNewContact('');
+                        const name = newContactName.trim();
+                        const phone = newContactPhone.trim();
+                        if (name && phone) {
+                          setContacts(prev => [...prev, { name, phone }]);
+                          setNewContactName('');
+                          setNewContactPhone('');
                         }
                       }}
                       className="px-4 py-2 bg-blue-600 hover:bg-blue-500 rounded-lg text-sm font-medium transition-colors whitespace-nowrap"
@@ -239,12 +252,12 @@ export default function HomePage() {
                     <div className="space-y-2">
                       {contacts.map((contact, idx) => (
                         <div key={idx} className="flex items-center gap-3 p-3 rounded-lg border border-slate-600 bg-slate-800/50">
-                          <span className="flex-1 text-sm text-slate-200 truncate">{contact.name}</span>
+                          <span className="flex-1 text-sm text-slate-200">{contact.name}</span>
+                          <span className="text-sm font-mono text-blue-400">{contact.phone}</span>
                           <button
                             type="button"
                             onClick={() => setContacts(prev => prev.filter((_, i) => i !== idx))}
                             className="text-slate-500 hover:text-red-400 transition-colors flex-shrink-0 text-lg leading-none"
-                            title="Eliminar contacto"
                           >
                             ×
                           </button>

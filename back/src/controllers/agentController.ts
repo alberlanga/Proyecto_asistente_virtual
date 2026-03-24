@@ -14,7 +14,7 @@ export const createAgent = async (req: AuthRequest, res: Response) => {
       additionalInfo
     } = req.body;
 
-    const contactsArray: { name: string }[] = Array.isArray(contacts) ? contacts : [];
+    const contactsArray: { name: string; phone: string }[] = Array.isArray(contacts) ? contacts : [];
 
     if (!req.user) return res.status(401).json({ error: 'Usuario no autenticado.' });
 

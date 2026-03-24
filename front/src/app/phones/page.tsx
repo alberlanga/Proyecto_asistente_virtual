@@ -79,14 +79,13 @@ export default function PhonesPage() {
                   <div>
                     <p className="text-white font-mono font-medium">{n.number}</p>
                     <div className="flex gap-2 mt-1 flex-wrap">
-                      <span className={`text-xs px-2 py-0.5 rounded-full ${n.vapiPhoneNumberId ? 'bg-green-900/40 text-green-400' : 'bg-yellow-900/40 text-yellow-400'}`}>
-                        {n.vapiPhoneNumberId ? 'Registrado en Vapi' : 'Sin registrar en Vapi'}
-                      </span>
-                      {n.agents?.length > 0 && n.agents.map((a: any) => (
+                      {n.agents?.length > 0 ? n.agents.map((a: any) => (
                         <span key={a.id} className="text-xs px-2 py-0.5 rounded-full bg-blue-900/40 text-blue-400">
-                          Agente: {a.agentName}
+                          {a.agentName}
                         </span>
-                      ))}
+                      )) : (
+                        <span className="text-xs px-2 py-0.5 rounded-full bg-slate-700 text-slate-400">Sin asignar</span>
+                      )}
                     </div>
                   </div>
                   <button

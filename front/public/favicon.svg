@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" fill="none">
+  <rect width="32" height="32" rx="8" fill="#0f172a"/>
+  <!-- Auricular -->
+  <path d="M8 14c0-4.418 3.582-8 8-8s8 3.582 8 8v2a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-2a2 2 0 0 1 2-2h.5A6.5 6.5 0 0 0 9.5 12H10a2 2 0 0 1 2 2v2a2 2 0 0 1-2 2H9a2 2 0 0 1-2-2v-2z" fill="url(#g1)"/>
+  <!-- Onda izquierda -->
+  <path d="M6 13c0-5.523 4.477-10 10-10" stroke="#6366f1" stroke-width="1.5" stroke-linecap="round" opacity="0.5"/>
+  <!-- Onda derecha -->
+  <path d="M26 13c0-5.523-4.477-10-10-10" stroke="#818cf8" stroke-width="1.5" stroke-linecap="round" opacity="0.5"/>
+  <!-- Cable -->
+  <path d="M16 18v3c0 1.657-1.343 3-3 3h-1" stroke="#6366f1" stroke-width="1.5" stroke-linecap="round"/>
+  <!-- Punto cable -->
+  <circle cx="12" cy="24" r="1.5" fill="#818cf8"/>
+  <defs>
+    <linearGradient id="g1" x1="8" y1="10" x2="24" y2="22" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#6366f1"/>
+      <stop offset="1" stop-color="#a855f7"/>
+    </linearGradient>
+  </defs>
+</svg>

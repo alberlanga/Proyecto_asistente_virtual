@@ -182,7 +182,7 @@ export default function DashboardPage() {
               <option value="">Sin asignar</option>
               {myNumbers.map((n: any) => (
                 <option key={n.id} value={n.id}>
-                  {n.number} {n.vapiPhoneNumberId ? '(Vapi ✓)' : '(Sin Vapi)'}
+                  {n.number}
                 </option>
               ))}
             </select>
@@ -252,7 +252,10 @@ export default function DashboardPage() {
                             e.stopPropagation();
                             if (!call.summary) return;
                             const rect = (e.target as HTMLElement).getBoundingClientRect();
-                            setExpandedSummary({ id: call.id, text: call.summary, x: rect.left, y: rect.bottom + 6 });
+                            const popupHeight = 200;
+                            const spaceBelow = window.innerHeight - rect.bottom;
+                            const y = spaceBelow < popupHeight ? rect.top - popupHeight - 6 : rect.bottom + 6;
+                            setExpandedSummary({ id: call.id, text: call.summary, x: rect.left, y });
                           }}
                         >
                           {call.summary || '—'}
